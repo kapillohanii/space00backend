@@ -8,6 +8,13 @@ router.route('/').get((req, res) => {
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
 });
+router.route('/profile/:username').get((req, res) => {
+  const username = req.params.username;
+  User.find({ username: username })
+    .then(users => res.json(users))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/search').get((req, res) => {
   const searchTerm = req.query.term;// Retrieve the search term from the query parameters
   // Use a regular expression to perform a case-insensitive search for users with a username matching the search term
