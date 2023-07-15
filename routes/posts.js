@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const moment = require('moment')
+const moment = require('moment-timezone');
 let Post = require('../models/post.model');
 
 router.route('/').get((req, res) => {
   Post.find()
-    .sort({ createdAt: -1 }) 
+    .sort({ createdAt: -1 })
     .then(posts => res.json(posts))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -13,7 +13,7 @@ router.route('/add').post((req, res) => {
   const username = req.body.username;
   const title = req.body.title;
   const content = req.body.content;
-  const date = moment(Date.parse(req.body.date)).format('MMMM Do YYYY, h:mm a');
+  const date = moment.tz(req.body.date, 'Asia/Kolkata').format('MMMM Do YYYY, h:mm a');
 
   const newPost = new Post({
     username,
