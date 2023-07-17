@@ -7,6 +7,7 @@ const postSchema = new Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   date: { type: String, required: true },
+  sentiment: {type: String, required:true}
 }, {
   timestamps: true,
 });

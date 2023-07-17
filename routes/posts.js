@@ -14,12 +14,14 @@ router.route('/add').post((req, res) => {
   const title = req.body.title;
   const content = req.body.content;
   const date = moment.tz(req.body.date, 'Asia/Kolkata').format('MMMM Do YYYY, h:mm a');
+  const sentiment = req.body.sentiment;
 
   const newPost = new Post({
     username,
     title,
     content,
     date,
+    sentiment,
   });
   newPost.save()
     .then(() => res.json('Post published!'))
